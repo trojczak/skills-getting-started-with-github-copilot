@@ -61,3 +61,15 @@ def test_delete_unknown_participant_returns_not_found(client):
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Participant not found for this activity"
+
+
+def test_signup_rejects_invalid_email(client):
+    response = client.post("/activities/Chess%20Club/signup", params={"email": "not-an-email"})
+
+    assert response.status_code == 422
+
+
+def test_delete_rejects_invalid_email(client):
+    response = client.delete("/activities/Chess%20Club/participants", params={"email": "not-an-email"})
+
+    assert response.status_code == 422

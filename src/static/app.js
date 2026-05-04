@@ -123,6 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const { activityName, email } = deleteButton.dataset;
 
+    if (!confirm(`Remove ${email} from ${activityName}?`)) {
+      return;
+    }
+
     try {
       const response = await fetch(
         `/activities/${encodeURIComponent(activityName)}/participants?email=${encodeURIComponent(email)}`,
