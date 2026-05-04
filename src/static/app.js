@@ -7,14 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showMessage(text, type) {
     messageDiv.textContent = text;
-    messageDiv.className = type;
-    messageDiv.classList.remove("hidden");
+    messageDiv.classList.remove("hidden", "success", "error");
+    messageDiv.classList.add("message", type);
 
     if (messageTimeoutId) {
       clearTimeout(messageTimeoutId);
     }
 
     messageTimeoutId = setTimeout(() => {
+      messageDiv.classList.remove("success", "error");
       messageDiv.classList.add("hidden");
     }, 5000);
   }
